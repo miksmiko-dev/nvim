@@ -1,0 +1,24 @@
+{
+  "Prisma Model": {
+    "prefix": "model",
+    "body": [
+      "model ${1:ModelName} {",
+      "  id        Int      @id @default(autoincrement())",
+      "  createdAt DateTime @default(now())",
+      "  updatedAt DateTime @updatedAt",
+      "",
+      "  ${2:field} ${3:String}",
+      "",
+      "  @@map(\"${4:table_name}\")",
+      "}"
+    ],
+    "description": "Prisma model with timestamps"
+  },
+  "Prisma Relation (one-to-many)": {
+    "prefix": "prelation",
+    "body": [
+      "${1:relatedModel}   ${2:RelatedModel}[] @relation(\"${3:relationName}\")"
+    ],
+    "description": "Prisma one-to-many relation field"
+  }
+}

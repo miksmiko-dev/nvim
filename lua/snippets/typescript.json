@@ -1,0 +1,183 @@
+{
+  "NestJS Controller": {
+    "prefix": "nctrl",
+    "body": [
+      "import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common'",
+      "import { ${1:Resource}Service } from './${2:resource}.service'",
+      "",
+      "@Controller('${3:resource}')",
+      "export class ${1:Resource}Controller {",
+      "  constructor(private readonly ${4:resource}Service: ${1:Resource}Service) {}",
+      "",
+      "  @Get()",
+      "  findAll() {",
+      "    return this.${4:resource}Service.findAll()",
+      "  }",
+      "",
+      "  @Get(':id')",
+      "  findOne(@Param('id') id: string) {",
+      "    return this.${4:resource}Service.findOne(+id)",
+      "  }",
+      "",
+      "  @Post()",
+      "  create(@Body() createDto: $0) {",
+      "    return this.${4:resource}Service.create(createDto)",
+      "  }",
+      "",
+      "  @Put(':id')",
+      "  update(@Param('id') id: string, @Body() updateDto: any) {",
+      "    return this.${4:resource}Service.update(+id, updateDto)",
+      "  }",
+      "",
+      "  @Delete(':id')",
+      "  remove(@Param('id') id: string) {",
+      "    return this.${4:resource}Service.remove(+id)",
+      "  }",
+      "}"
+    ],
+    "description": "NestJS CRUD controller"
+  },
+  "NestJS Service": {
+    "prefix": "nsvc",
+    "body": [
+      "import { Injectable, NotFoundException } from '@nestjs/common'",
+      "",
+      "@Injectable()",
+      "export class ${1:Resource}Service {",
+      "  async findAll() {",
+      "    $0",
+      "  }",
+      "",
+      "  async findOne(id: number) {",
+      "    ",
+      "  }",
+      "",
+      "  async create(createDto: any) {",
+      "    ",
+      "  }",
+      "",
+      "  async update(id: number, updateDto: any) {",
+      "    ",
+      "  }",
+      "",
+      "  async remove(id: number) {",
+      "    ",
+      "  }",
+      "}"
+    ],
+    "description": "NestJS service with CRUD stubs"
+  },
+  "NestJS Module": {
+    "prefix": "nmod",
+    "body": [
+      "import { Module } from '@nestjs/common'",
+      "import { ${1:Resource}Controller } from './${2:resource}.controller'",
+      "import { ${1:Resource}Service } from './${2:resource}.service'",
+      "",
+      "@Module({",
+      "  imports: [$3],",
+      "  controllers: [${1:Resource}Controller],",
+      "  providers: [${1:Resource}Service],",
+      "  exports: [${1:Resource}Service],",
+      "})",
+      "export class ${1:Resource}Module {}"
+    ],
+    "description": "NestJS module"
+  },
+  "NestJS DTO": {
+    "prefix": "ndto",
+    "body": [
+      "import { IsString, IsOptional, IsNumber } from 'class-validator'",
+      "import { ApiProperty } from '@nestjs/swagger'",
+      "",
+      "export class ${1:Create}${2:Resource}Dto {",
+      "  @ApiProperty()",
+      "  @IsString()",
+      "  ${3:field}: string",
+      "",
+      "  $0",
+      "}"
+    ],
+    "description": "NestJS DTO with validation and Swagger decorators"
+  },
+  "Express Router": {
+    "prefix": "exrouter",
+    "body": [
+      "import { Router, Request, Response, NextFunction } from 'express'",
+      "",
+      "const router = Router()",
+      "",
+      "router.get('/', async (req: Request, res: Response) => {",
+      "  try {",
+      "    $0",
+      "    res.json({ data: null })",
+      "  } catch (error) {",
+      "    res.status(500).json({ error: 'Internal server error' })",
+      "  }",
+      "})",
+      "",
+      "export default router"
+    ],
+    "description": "Express router with TypeScript"
+  },
+  "Express Middleware": {
+    "prefix": "exmw",
+    "body": [
+      "import { Request, Response, NextFunction } from 'express'",
+      "",
+      "export function ${1:middlewareName}(req: Request, res: Response, next: NextFunction) {",
+      "  $0",
+      "  next()",
+      "}"
+    ],
+    "description": "Express middleware function"
+  },
+  "TypeORM Entity": {
+    "prefix": "torm",
+    "body": [
+      "import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm'",
+      "",
+      "@Entity('${1:table_name}')",
+      "export class ${2:EntityName} {",
+      "  @PrimaryGeneratedColumn()",
+      "  id: number",
+      "",
+      "  @Column()",
+      "  ${3:field}: ${4:string}",
+      "",
+      "  @CreateDateColumn()",
+      "  createdAt: Date",
+      "",
+      "  @UpdateDateColumn()",
+      "  updatedAt: Date",
+      "",
+      "  $0",
+      "}"
+    ],
+    "description": "TypeORM entity class"
+  },
+  "TypeORM Repository method": {
+    "prefix": "trepo",
+    "body": [
+      "async ${1:methodName}(): Promise<${2:ReturnType}> {",
+      "  return this.${3:entityName}Repository",
+      "    .createQueryBuilder('${4:alias}')",
+      "    .${0}",
+      "    .getMany()",
+      "}"
+    ],
+    "description": "TypeORM repository method with QueryBuilder"
+  },
+  "async try-catch": {
+    "prefix": "atc",
+    "body": [
+      "try {",
+      "  $1",
+      "} catch (error) {",
+      "  ${2:console.error(error)}",
+      "  throw error",
+      "}"
+    ],
+    "description": "Async try-catch block"
+  }
+}

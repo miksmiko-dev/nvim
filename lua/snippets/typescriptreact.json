@@ -1,0 +1,98 @@
+{
+  "React Functional Component": {
+    "prefix": "rfc",
+    "body": [
+      "import React from 'react'",
+      "",
+      "interface ${1:ComponentName}Props {",
+      "  $2",
+      "}",
+      "",
+      "export function ${1:ComponentName}({ $3 }: ${1:ComponentName}Props) {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:ComponentName}"
+    ],
+    "description": "React functional component with TypeScript props"
+  },
+  "Next.js Page Component": {
+    "prefix": "npage",
+    "body": [
+      "import type { NextPage } from 'next'",
+      "",
+      "const ${1:PageName}: NextPage = () => {",
+      "  return (",
+      "    <main>",
+      "      $0",
+      "    </main>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:PageName}"
+    ],
+    "description": "Next.js page component"
+  },
+  "Next.js API Route (App Router)": {
+    "prefix": "napr",
+    "body": [
+      "import { NextRequest, NextResponse } from 'next/server'",
+      "",
+      "export async function GET(request: NextRequest) {",
+      "  try {",
+      "    $0",
+      "    return NextResponse.json({ data: null }, { status: 200 })",
+      "  } catch (error) {",
+      "    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })",
+      "  }",
+      "}",
+      "",
+      "export async function POST(request: NextRequest) {",
+      "  const body = await request.json()",
+      "  try {",
+      "    return NextResponse.json({ data: null }, { status: 201 })",
+      "  } catch (error) {",
+      "    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })",
+      "  }",
+      "}"
+    ],
+    "description": "Next.js App Router API route handler"
+  },
+  "React useState hook": {
+    "prefix": "us",
+    "body": [
+      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState<${2:type}>(${3:initialValue})"
+    ],
+    "description": "useState with TypeScript type"
+  },
+  "React useEffect hook": {
+    "prefix": "ue",
+    "body": [
+      "useEffect(() => {",
+      "  $1",
+      "  return () => {",
+      "    $2",
+      "  }",
+      "}, [$3])"
+    ],
+    "description": "useEffect with cleanup"
+  },
+  "React custom hook": {
+    "prefix": "rhook",
+    "body": [
+      "import { useState, useEffect } from 'react'",
+      "",
+      "export function use${1:HookName}($2) {",
+      "  $0",
+      "  return {",
+      "    ",
+      "  }",
+      "}"
+    ],
+    "description": "Custom React hook"
+  }
+}
