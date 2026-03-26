@@ -10,7 +10,11 @@
     "lazyvim.plugins.extras.test.core",
     "lazyvim.plugins.extras.lang.sql",
     "lazyvim.plugins.extras.lang.python",
-    "lazyvim.plugins.extras.lang.php"
+    "lazyvim.plugins.extras.lang.php",
+    "lazyvim.plugins.extras.ai.copilot",
+    "lazyvim.plugins.extras.editor.aerial",
+    "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.lang.docker"
   ],
   "install_version": 8,
   "news": {

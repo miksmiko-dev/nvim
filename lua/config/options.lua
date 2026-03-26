@@ -5,3 +5,11 @@ vim.g.autoformat = true
 
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+vim.g.loaded_python3_provider = 0
+
+vim.opt.breakindent = true
+vim.opt.scrolloff = 8
+vim.opt.mouse = "a"
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true

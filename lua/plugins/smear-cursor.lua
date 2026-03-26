@@ -3,14 +3,15 @@ return {
   event = "VeryLazy",
   opts = {
     enabled = true,
-    smear_between_buffers = false,
-    stiffness = 0.9,
-    trailing_stiffness = 0.8,
-    distance_stop_animation = 0.3,
-    -- cursor_color = "#00fa9a", -- tropical apple green
-    -- smear_length = 14, -- longer trail
-    -- smear_fade_time = 250, -- slower fade
-    -- smear_easing = "inOutQuad", -- smoother easing
-    -- keep_trail_on_line_change = true,
+    smear_between_buffers = true,
+    smear_between_windows = true,
+    scroll_buffer_size = 15,
+    stiffness = 0.6,
+    trailing_stiffness = 0.3,
+    trailing_exponent = 0.1,
+    distance_stop_animation = 0.5,
+    hide_target_hack = true,
+    legacy_computing_symbols_support = false,
+    smear_insert_mode = true,
   },
 }

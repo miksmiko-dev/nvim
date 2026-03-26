@@ -95,7 +95,7 @@ return {
     },
     keys = {
       {
-        "<leader>F",
+        "<leader>e",
         function()
           require("neo-tree.command").execute({
             toggle = true,
@@ -105,6 +105,17 @@ return {
         end,
         desc = "Toggle Neo-tree (Floating & Reveal Current File)",
       },
+      -- {
+      --   "<leader>F",
+      --   function()
+      --     require("neo-tree.command").execute({
+      --       toggle = true,
+      --       reveal = true,
+      --       source = "filesystem",
+      --     })
+      --   end,
+      --   desc = "Toggle Neo-tree (Floating & Reveal Current File)",
+      -- },
       {
         "<leader>b",
         function()
@@ -131,8 +142,11 @@ return {
   -- 🍭 Snacks Notification UI Enhancement
   {
     "folke/snacks.nvim",
+    keys = {
+      { "<leader>e", false }, -- let neo-tree own <leader>e
+    },
     opts = function(_, opts)
-      opts.explorer.enabled = true -- keep snacks explorer if you want
+      opts.explorer = { enabled = false } -- neo-tree handles file exploration
       opts.notify = {
         backend = "nui",
         level = vim.log.levels.INFO,

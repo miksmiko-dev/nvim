@@ -2,6 +2,7 @@ return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     "nvim-telescope/telescope-ui-select.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   opts = function(_, opts)
     opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
@@ -24,5 +25,6 @@ return {
     local telescope = require("telescope")
     telescope.setup(opts)
     telescope.load_extension("ui-select")
+    telescope.load_extension("fzf")
   end,
 }

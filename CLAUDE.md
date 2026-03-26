@@ -64,6 +64,11 @@ To disable a LazyVim plugin: `{ "plugin/name", enabled = false }`.
 | `disable-line.lua` | `indent-blankline.nvim` | Indent guides (│ character, muted gray) |
 | `gitsign.lua` | `gitsigns.nvim` | Git signs + inline blame enabled |
 | `todo.lua` | `todo-comments.nvim` | Highlight TODO/FIXME comments |
+| `diffview.lua` | `diffview.nvim` | Git diff/history viewer (horizontal split, merge tool) |
+| `spectre.lua` | `nvim-spectre` | Project-wide find & replace |
+| `colorizer.lua` | `nvim-colorizer.lua` | Inline color previews; Tailwind class colors enabled |
+| `snack-image.lua` | `snacks.nvim` | Inline image rendering (WezTerm); centered, max 40×12 |
+| `lsp.lua` | `nvim-lspconfig` | Disables phpactor LSP server |
 
 ### Custom Keybindings
 
@@ -79,6 +84,13 @@ To disable a LazyVim plugin: `{ "plugin/name", enabled = false }`.
 | `<leader>da` | DAP: continue (auto-loads `.vscode/launch.json` if present) |
 | `<leader>dO` | DAP: step out |
 | `<leader>do` | DAP: step over |
+| `<leader>gd` | Diffview: open diff |
+| `<leader>gh` | Diffview: current file history |
+| `<leader>gH` | Diffview: repo history |
+| `<leader>gq` | Diffview: close |
+| `<leader>sr` | Spectre: project find & replace |
+| `<leader>sw` | Spectre: search word under cursor |
+| `<leader>sf` | Spectre: find & replace in current file |
 
 All other keybindings come from LazyVim defaults.
 
