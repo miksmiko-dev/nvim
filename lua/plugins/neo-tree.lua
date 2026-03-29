@@ -43,7 +43,6 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     lazy = true,
-    priority = 1001,
     opts = {
       sources = { "filesystem", "buffers", "git_status" },
       source_selector = {
@@ -59,7 +58,7 @@ return {
         filtered_items = {
           visible = true,
           hide_dotfiles = false,
-          hide_gitignored = false,
+          hide_gitignored = true,
         },
         follow_current_file = {
           enabled = true,
