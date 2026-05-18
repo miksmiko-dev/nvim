@@ -5,6 +5,7 @@ local js_based_languages = {
   "javascriptreact",
   "vue",
 }
+
 return {
   {
     "mfussenegger/nvim-dap",
@@ -23,8 +24,9 @@ return {
       end
 
       for _, language in ipairs(js_based_languages) do
-        dap.configurations.typescriptreact = dap.configurations.typescriptreact or {}
-        vim.list_extend(dap.configurations.typescriptreact, {
+        dap.configurations[language] = {
+          -- Next.js: server-side debugging
+          -- Start Next.js with: NODE_OPTIONS='--inspect' next dev
           {
             name = "Next.js: Debug Server-Side",
             type = "pwa-node",
@@ -33,8 +35,8 @@ return {
             skipFiles = { "<node_internals>/**", "**/node_modules/**" },
             cwd = "${workspaceFolder}",
             sourceMaps = true,
-            -- Start Next.js with: NODE_OPTIONS='--inspect' next dev
           },
+          -- Next.js: client-side debugging via Chrome
           {
             name = "Next.js: Debug Client-Side (Chrome)",
             type = "pwa-chrome",
@@ -43,11 +45,11 @@ return {
             webRoot = "${workspaceFolder}",
             sourceMaps = true,
             sourceMapPathOverrides = {
-              -- Map Next.js internal paths to source files
               ["webpack://_N_E/*"] = "${webRoot}/*",
               ["webpack:///./*"] = "${webRoot}/.next/static/chunks/./*",
             },
           },
+          -- Next.js: full-stack (attach Chrome after starting server with --inspect)
           {
             name = "Next.js: Full-Stack (Server + Client)",
             type = "pwa-chrome",
@@ -55,15 +57,11 @@ return {
             url = "http://localhost:3000",
             webRoot = "${workspaceFolder}",
             sourceMaps = true,
-            -- First start Next.js with NODE_OPTIONS='--inspect' next dev
-            -- then use this to attach Chrome debugger for client-side
             sourceMapPathOverrides = {
               ["webpack://_N_E/*"] = "${webRoot}/*",
             },
           },
-        })
-        dap.configurations[language] = {
-          -- Debug single nodejs files
+          -- Debug a single Node.js file
           {
             name = "Launch",
             type = "pwa-node",
@@ -76,6 +74,7 @@ return {
             protocol = "inspector",
             console = "integratedTerminal",
           },
+          -- Attach to a running Node.js process
           {
             name = "Attach to node process",
             type = "pwa-node",
@@ -83,6 +82,7 @@ return {
             rootPath = "${workspaceFolder}",
             processId = require("dap.utils").pick_process,
           },
+          -- Launch Chrome with a prompted URL
           {
             type = "pwa-chrome",
             request = "launch",
@@ -107,8 +107,7 @@ return {
             sourceMaps = true,
             userDataDir = false,
           },
-
-          -- Divider for the launch.json derived configs
+          -- Divider for launch.json derived configs
           {
             name = "----- ↓ launch.json configs ↓ -----",
             type = "",
@@ -117,6 +116,7 @@ return {
         }
       end
     end,
+
     keys = {
       {
         "<leader>dO",
@@ -148,11 +148,12 @@ return {
         desc = "Run with Args",
       },
     },
+
     dependencies = {
-      -- Install the vscode-js-debug adapter
+      -- Install the vscode-js-debug adapter.
+      -- After install, build it and rename dist -> out.
       {
         "microsoft/vscode-js-debug",
-        -- After install, build it and rename the dist directory to out
         build = "npm install --legacy-peer-deps --no-save --ignore-scripts && npx gulp vsDebugServerBundle && mv dist out",
         version = "1.*",
       },
@@ -161,16 +162,13 @@ return {
         config = function()
           ---@diagnostic disable-next-line: missing-fields
           require("dap-vscode-js").setup({
-            -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-            -- node_path = "node",
+            -- debugger_path is unused when debugger_cmd is set,
+            -- but kept here as a reference for the install location.
+            -- debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug/"),
 
-            -- Path to vscode-js-debug installation.
-            debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug/"),
+            -- Explicit command takes precedence over debugger_path.
             debugger_cmd = { "js-debug-adapter" },
-            -- Command to use to launch the debug server. Takes precedence over "node_path" and "debugger_path"
-            -- debugger_cmd = { "js-debug-adapter" },
 
-            -- which adapters to register in nvim-dap
             adapters = {
               "chrome",
               "pwa-node",
@@ -179,15 +177,6 @@ return {
               "pwa-extensionHost",
               "node-terminal",
             },
-
-            -- Path for file logging
-            -- log_file_path = "(stdpath cache)/dap_vscode_js.log",
-
-            -- Logging level for output to file. Set to false to disable logging.
-            -- log_file_level = false,
-
-            -- Logging level for output to console. Set to false to disable console output.
-            -- log_console_level = vim.log.levels.ERROR,
           })
         end,
       },

@@ -40,6 +40,9 @@ return {
           vim.api.nvim_set_hl(0, group, { fg = "#FFFFFF", bg = "none" })
         end
 
+        -- Indent scope indicator
+        vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = "#6b7280" })
+
         -- Active buffer (nvim-bufferline)
         for _, group in ipairs({
           "BufferLineBufferSelected",

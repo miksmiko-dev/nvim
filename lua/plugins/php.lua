@@ -1,0 +1,109 @@
+-- return {
+--   -- Add Blade support to Treesitter
+--   {
+--     "nvim-treesitter/nvim-treesitter",
+--     opts = function(_, opts)
+--       if type(opts.ensure_installed) == "table" then
+--         vim.list_extend(opts.ensure_installed, { "php", "blade", "php_only" })
+--       end
+--     end,
+--     config = function(_, opts)
+--       -- Register the blade parser safely
+--       local ok, parsers = pcall(require, "nvim-treesitter.parsers")
+--       if ok then
+--         -- Try to get the configs table using the standard function or the fallback list
+--         local configs = nil
+--         if type(parsers.get_parser_configs) == "function" then
+--           configs = parsers.get_parser_configs()
+--         elseif type(parsers.list) == "table" then
+--           configs = parsers.list
+--         end
+--
+--         if configs then
+--           configs.blade = {
+--             install_info = {
+--               url = "https://github.com/EmranMR/tree-sitter-blade",
+--               files = { "src/parser.c" },
+--               branch = "main",
+--             },
+--             filetype = "blade",
+--           }
+--         end
+--       end
+--
+--       -- Call the standard Treesitter setup
+--       -- We use pcall here too just in case the configs module is somehow missing
+--       local config_ok, configs_mod = pcall(require, "nvim-treesitter.configs")
+--       if config_ok then
+--         configs_mod.setup(opts)
+--       end
+--     end,
+--   },
+--
+--   -- LSP Configuration
+--   {
+--     "neovim/nvim-lspconfig",
+--     opts = {
+--       servers = {
+--         -- Ensure intelephense is configured
+--         intelephense = {
+--           enabled = true,
+--           filetypes = { "php", "blade" },
+--           settings = {
+--             intelephense = {
+--               files = {
+--                 maxSize = 5000000,
+--               },
+--             },
+--           },
+--         },
+--       },
+--     },
+--   },
+--
+--   -- Laravel specific plugin
+--   {
+--     "adalessa/laravel.nvim",
+--     dependencies = {
+--       "nvim-telescope/telescope.nvim",
+--       "tpope/vim-dotenv",
+--       "MunifTanjim/nui.nvim",
+--       "nvimtools/none-ls.nvim",
+--     },
+--     cmd = { "Laravel" },
+--     keys = {
+--       { "<leader>la", ":Laravel<cr>", desc = "Laravel" },
+--     },
+--     opts = {
+--       lsp_server = "intelephense",
+--       features = {
+--         null_ls = {
+--           enabled = true,
+--         },
+--       },
+--     },
+--     config = true,
+--   },
+--
+--   -- Formatting with Conform
+--   {
+--     "stevearc/conform.nvim",
+--     opts = {
+--       formatters_by_ft = {
+--         php = { "pint", "php_cs_fixer" },
+--       },
+--     },
+--   },
+--
+--   -- Ensure Blade filetype is detected
+--   {
+--     "neovim/nvim-lspconfig",
+--     opts = function()
+--       vim.filetype.add({
+--         pattern = {
+--           [".*%.blade%.php"] = "blade",
+--         },
+--       })
+--     end,
+--   },
+-- }

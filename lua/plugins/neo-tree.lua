@@ -1,44 +1,3 @@
--- return {
---   "nvim-neo-tree/neo-tree.nvim",
---   opts = {
---     filesystem = {
---       renderers = {
---         root = {
---           { "indent" },
---         },
---       },
---       filtered_items = {
---         visible = true,
---         hide_dotfiles = false,
---         hide_gitignored = false,
---       },
---       follow_current_file = {
---         enabled = true, -- This ensures the current file is focused
---         leave_dirs_open = false,
---       },
---       hijack_netrw_behavior = "open_current",
---     },
---     window = {
---       position = "float",
---       popup = {
---         size = {
---           height = "80%",
---           width = "60%",
---         },
---         show_title = false,
---       },
---     },
---   },
---   keys = {
---     {
---       "<leader>e",
---       function()
---         require("neo-tree.command").execute({ toggle = true, reveal = true })
---       end,
---       desc = "Toggle Neo-tree (Floating & Reveal Current File)",
---     },
---   },
--- }
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -146,6 +105,10 @@ return {
     },
     opts = function(_, opts)
       opts.explorer = { enabled = false } -- neo-tree handles file exploration
+      opts.indent = {
+        indent = { enabled = false }, -- hide guides on all lines
+        scope = { enabled = true },   -- show guide only for current scope
+      }
       opts.notify = {
         backend = "nui",
         level = vim.log.levels.INFO,
